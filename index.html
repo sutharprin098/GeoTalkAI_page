@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GeoTalkAI | AI Powered QGIS Plugin</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #0f172a;
+      --accent: #3b82f6;
+      --text-main: #1f2937;
+      --text-light: #4b5563;
+      --bg-light: #f8fafc;
+      --white: #ffffff;
+      --coming-soon: #f59e0b;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* --- HEADER SECTION --- */
+    header {
+      background: linear-gradient(180deg, #020617 0%, #172554 100%);
+      color: #ffffff;
+      padding: 60px 20px 100px;
+      text-align: center;
+      position: relative;
+    }
+
+    .logo-container {
+      background-color: #ffffff;
+      padding: 15px 30px;
+      border-radius: 16px;
+      display: inline-block;
+      margin-bottom: 25px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .hero-logo {
+      max-width: 120px;
+      height: auto;
+      display: block;
+    }
+
+    .badge-soon {
+      background-color: var(--coming-soon);
+      color: #000;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: inline-block;
+      margin-bottom: 15px;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      margin: 10px 0 20px 0;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #ffffff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    header h1 span { color: #60a5fa; }
+
+    header p {
+      font-size: 1.35rem;
+      max-width: 750px;
+      margin: 0 auto 40px auto;
+      color: #ffffff;
+      font-weight: 400;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .cta-button {
+      background-color: var(--primary);
+      color: white;
+      padding: 16px 40px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+      display: inline-block;
+    }
+    .cta-button:hover { transform: translateY(-3px); background-color: #1d4ed8; }
+
+    /* --- SECTIONS --- */
+    section { padding: 80px 10%; background: var(--white); }
+    section:nth-child(even) { background: var(--bg-light); }
+
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+      color: #000;
+      font-weight: 800;
+      text-align: center;
+    }
+    
+    h2::after {
+      content: ''; display: block; width: 60px; height: 4px;
+      background: var(--primary); margin: 15px auto 0 auto; border-radius: 2px;
+    }
+
+    h3 { font-size: 1.5rem; color: var(--secondary); margin-bottom: 15px; font-weight: 700; }
+
+    /* --- PRODUCT TOUR --- */
+    .showcase-container {
+      max-width: 1100px; margin: 0 auto; display: flex; align-items: center;
+      gap: 60px; margin-bottom: 100px;
+    }
+    .showcase-container:last-child { margin-bottom: 0; }
+    .showcase-reverse { flex-direction: row-reverse; }
+    .showcase-text { flex: 1; }
+    .showcase-image { flex: 1; text-align: center; }
+    .screenshot {
+      max-width: 100%; height: auto; border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 1px solid #e2e8f0;
+    }
+
+    .feature-points { list-style: none; padding: 0; margin-top: 20px; }
+    .feature-points li { margin-bottom: 15px; display: flex; align-items: flex-start; font-size: 1.05rem; color: var(--text-main); }
+    .feature-points i { color: var(--primary); margin-top: 6px; margin-right: 15px; font-size: 1rem; }
+
+    /* --- CARDS --- */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+    .card { background: var(--white); padding: 35px 25px; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease; text-align: center; border: 1px solid #e2e8f0; }
+    .card:hover { transform: translateY(-10px); border-color: var(--accent); }
+    .card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
+
+    /* --- LISTS --- */
+    .content-max-width { max-width: 800px; margin: 0 auto; }
+    ul.check-list { list-style: none; padding: 0; }
+    ul.check-list li { margin-bottom: 15px; padding-left: 30px; position: relative; font-size: 1.1rem; }
+    ul.check-list li::before { content: '\f00c'; font-family: 'FontAwesome'; color: var(--primary); position: absolute; left: 0; font-weight: bold; }
+
+    /* --- STATUS --- */
+    .status-container { display: flex; justify-content: center; margin-top: 50px; }
+    .status { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; padding: 20px 30px; border-radius: 12px; display: inline-flex; align-items: center; gap: 15px; }
+    .status i { font-size: 1.5rem; }
+
+    /* --- FOOTER --- */
+    footer { background: #0f172a; color: #cbd5e1; text-align: center; padding: 60px 20px; font-size: 0.9rem; }
+    footer a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: #60a5fa; text-decoration: underline; }
+    
+    /* LinkedIn Link Style */
+    .developer-link {
+        color: #ffffff;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .developer-link:hover {
+        color: #60a5fa;
+    }
+
+    /* --- MOBILE RESPONSIVE TWEAKS --- */
+    @media (max-width: 900px) {
+      /* Header Font Adjustment */
+      header h1 { font-size: 2.5rem; }
+      header p { font-size: 1.1rem; }
+      header { padding: 50px 20px 80px; }
+      
+      /* Section Padding Reduction */
+      section { padding: 50px 5%; }
+      
+      /* Stack Product Tour */
+      .showcase-container, .showcase-reverse { flex-direction: column; gap: 30px; text-align: left; margin-bottom: 60px; }
+      
+      /* Image Sizing on Mobile */
+      .screenshot { max-width: 100%; width: 100%; }
+      
+      /* Card Grid Adjustment */
+      .cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo-container">
+    <img src="logo.png" alt="GeoTalkAI Logo" class="hero-logo">
+  </div>
+  
+  <br>
+  <div class="badge-soon">
+    <i class="fa-solid fa-clock"></i> Launching Soon
+  </div>
+
+  <h1>GeoTalk<span>AI</span></h1>
+  
+  <p>
+    Transforming GIS with the power of Natural Language. 
+    Just type what you want, and GeoTalkAI handles the complexity.
+  </p>
+  
+  <a href="#demo" class="cta-button">See It In Action</a>
+</header>
+
+<section id="demo">
+  <div class="showcase-container">
+    <div class="showcase-image">
+      <img src="ss.png" alt="GeoTalkAI Chat Interface" class="screenshot">
+    </div>
+    <div class="showcase-text">
+      <h3>Your AI-Powered Assistant</h3>
+      <p>The interface is designed to feel like a familiar chat app, but with powerful GIS capabilities under the hood.</p>
+      
+      <ul class="feature-points">
+        <li>
+          <i class="fa-solid fa-arrow-right"></i> 
+          <strong>Natural Language Input:</strong> 
+          Use the text bar at the bottom to type commands like "Calculate area of polygons" or "Create 100m buffer".
+        </li>
+        <li>
+          <i class="fa-solid fa-arrow-right"></i> 
+          <strong>Quick Suggestions:</strong> 
+          Not sure what to type? The main screen offers one-click shortcuts for common tasks like NDVI download.
+        </li>
+        <li>
+          <i class="fa-solid fa-arrow-right"></i> 
+          <strong>Real-time Feedback:</strong> 
+          See your chat history and the AI's processing status instantly.
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="showcase-container showcase-reverse">
+    <div class="showcase-image">
+      <img src="more.png" alt="GeoTalkAI Menu" class="screenshot" style="max-width: 250px;">
+    </div>
+    <div class="showcase-text">
+      <h3>Complete Control & Tools</h3>
+      <p>Manage your workflow effectively with our comprehensive tool menu.</p>
+
+      <ul class="feature-points">
+        <li>
+          <i class="fa-solid fa-arrow-right"></i> 
+          <strong>Dashboard & Settings:</strong> 
+          Configure your API keys (Google Earth Engine/OpenAI) and view usage stats.
+        </li>
+        <li>
+          <i class="fa-solid fa-arrow-right"></i> 
+          <strong>Tutorials:</strong> 
+          Built-in guides to help you master AI-GIS workflows quickly.
+        </li>
+        <li>
+          <i class="fa-solid fa-arrow-right"></i> 
+          <strong>Export Chat:</strong> 
+          Save your analysis steps and code snippets for your reports or research papers.
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section style="text-align: center;">
+  <h2>Why GeoTalkAI?</h2>
+  <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
+    <div style="background: #eff6ff; padding: 20px; border-radius: 10px; width: 200px;">
+      <i class="fa-solid fa-bolt" style="color: var(--primary); font-size: 2rem; margin-bottom: 10px;"></i><br>
+      <strong>Fast Processing</strong>
+    </div>
+    <div style="background: #eff6ff; padding: 20px; border-radius: 10px; width: 200px;">
+      <i class="fa-solid fa-code" style="color: var(--primary); font-size: 2rem; margin-bottom: 10px;"></i><br>
+      <strong>No Coding Needed</strong>
+    </div>
+    <div style="background: #eff6ff; padding: 20px; border-radius: 10px; width: 200px;">
+      <i class="fa-solid fa-earth-americas" style="color: var(--primary); font-size: 2rem; margin-bottom: 10px;"></i><br>
+      <strong>GEE Integrated</strong>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Core Capabilities</h2>
+  <div class="cards" id="features">
+    <div class="card">
+      <i class="fa-solid fa-comments"></i>
+      <h3>Natural Language</h3>
+      <p>Run complex GIS tools using simple English commands.</p>
+    </div>
+    <div class="card">
+      <i class="fa-solid fa-satellite"></i>
+      <h3>Satellite Data</h3>
+      <p>Instant access to NDVI, elevation, and land cover data.</p>
+    </div>
+    <div class="card">
+      <i class="fa-solid fa-gears"></i>
+      <h3>Automated Ops</h3>
+      <p>Buffers, clipping, and analysis handled automatically.</p>
+    </div>
+    <div class="card">
+      <i class="fa-solid fa-file-export"></i>
+      <h3>Export Ready</h3>
+      <p>Seamless support for Shapefile, GeoJSON, and KML.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="content-max-width">
+    <h2>Technical Architecture</h2>
+    <ul class="check-list">
+      <li>Developed as a custom <strong>QGIS Plugin</strong> (Python/PyQGIS)</li>
+      <li>Chat-based interface inspired by modern messaging apps</li>
+      <li>Integration with <strong>Google Earth Engine</strong> for big data</li>
+      <li>Hybrid support for Online APIs and Local LLMs</li>
+    </ul>
+    
+    <br><br>
+
+    <h2>Who is this for?</h2>
+    <ul class="check-list">
+        <li>GIS & Remote Sensing Students</li>
+        <li>Researchers & Academicians</li>
+        <li>Urban Planners & Environmental Analysts</li>
+    </ul>
+
+    <div class="status-container">
+      <div class="status">
+        <i class="fa-solid fa-rocket"></i>
+        <div>
+          <strong>Project Status: In Development</strong><br/>
+          GeoTalkAI is currently being built. Public release coming soon.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    &copy; 2026 GeoTalkAI. All rights reserved.
+  </div>
+  <div style="margin-top: 15px; opacity: 0.8;">
+    Developed by 
+    <a href="https://www.linkedin.com/in/prince-suthar-79552428a" target="_blank" class="developer-link">
+      Prince <i class="fa-brands fa-linkedin"></i>
+    </a>
+    <br/>
+    <a href="mailto:sutharprince098@gmail.com"><i class="fa-regular fa-envelope"></i> sutharprince098@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+  // Browser history ko reset karega taaki purani position yaad na rahe
+  if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+  } else {
+    window.onbeforeunload = function () {
+      window.scrollTo(0, 0);
+    }
+  }
+  
+  // Page load hone par turant upar scroll kare
+  window.onload = function() {
+    window.scrollTo(0, 0);
+  };
+</script>
+
+</body>
+</html>
